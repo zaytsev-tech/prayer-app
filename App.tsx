@@ -7,10 +7,10 @@
  *
  * @format
  */
+import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 import { Authorization } from './src/components/authorization';
 import { theme } from './src/styles';
 import { ThemeProvider } from 'styled-components';
@@ -21,7 +21,13 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: '#FFF' },
+            headerTintColor: '#514D47',
+            headerTitleAlign: 'center',
+          }}
+        >
           <Stack.Screen name="Authorization" component={Authorization} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,16 +1,14 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { Text, View } from 'react-native';
-import styled from 'styled-components';
-import { theme } from '../../styles';
+import { SignIn } from './screens/sign-in';
+
+const Tab = createBottomTabNavigator();
 
 export const Authorization = () => {
   return (
-    <View>
-      <Text>Authorization Text</Text>
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={SignIn} />
+      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+    </Tab.Navigator>
   );
 };
-
-const Header = styled(View)`
-  color: red;
-`;
