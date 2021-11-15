@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components';
+import { theme } from '../../styles';
 
 export const Authorization = () => {
   return (
@@ -11,5 +12,5 @@ export const Authorization = () => {
 };
 
 const Header = styled(View)`
-  ${({theme: { typography }}) => typography.title}
+  color: red;
 `;

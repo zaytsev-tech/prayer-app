@@ -16,5 +16,5 @@ export const typography = {
         letter-spacing: 0em;
         text-align: left;
         `,
-    }
+    },
 }

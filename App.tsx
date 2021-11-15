@@ -8,21 +8,24 @@
  * @format
  */
 
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Authorization } from './android/src/components/authorization';
-import {MyDesk} from './android/src/components/my-desk';
+import { Authorization } from './src/components/authorization';
+import { theme } from './src/styles';
+import { ThemeProvider } from 'styled-components';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Authorization" component={Authorization} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Authorization" component={Authorization} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 
