@@ -28,7 +28,7 @@ const App = () => {
             headerTitleAlign: 'center',
           }}
         >
-          <Stack.Screen name="Authorization" component={Authorization} />
+          <Stack.Screen name="Prayer" component={Authorization} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

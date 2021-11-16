@@ -4,18 +4,20 @@ import { Field, Form } from 'react-final-form';
 import { Button, Text, TextInput, View } from 'react-native';
 import { DefButton, DefInput } from '../../../ui';
 
-interface Login {
+interface Registration {
   email: string;
+  name: string;
   password: string;
 }
 
-const initialValues: Login = {
+const initialValues: Registration = {
   email: '',
+  name: '',
   password: '',
 };
 
-export const SignIn = () => {
-  const onSubmit = (values: Login) => {
+export const SignUp = () => {
+  const onSubmit = (values: Registration) => {
     if (values.email.indexOf('@') != -1) {
       console.log(values);
     } else {
@@ -42,6 +44,18 @@ export const SignIn = () => {
                 />
               )}
             />
+            <Text>Name</Text>
+            <Field
+              name="name"
+              render={({ input: { value, onChange } }) => (
+                <Input
+                  className={Input}
+                  placeholder="Your name"
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
             <Text>Password</Text>
             <Field
               name="password"
@@ -57,7 +71,7 @@ export const SignIn = () => {
               )}
             />
             <Submit>
-              <DefButton title="Log in" onPress={handleSubmit} />
+              <DefButton title="Sign up" onPress={handleSubmit} />
             </Submit>
           </ViewForm>
         )}
