@@ -1,2 +1,2 @@
-export type { User, LoginData } from './types';
+export type { User, Login } from './types';
 export { initialUser } from './state';

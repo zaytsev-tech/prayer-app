@@ -3,21 +3,25 @@ import styled from 'styled-components';
 import { Field, Form } from 'react-final-form';
 import { Button, Text, TextInput, View } from 'react-native';
 import { DefButton, DefInput } from '../../../ui';
+import { useDispatch } from 'react-redux';
+import { loginRequest } from '../../../store/auth/actions';
 
 interface Login {
   email: string;
-  password: string;
+  pass: string;
 }
 
 const initialValues: Login = {
   email: '',
-  password: '',
+  pass: '',
 };
 
 export const SignIn = () => {
+  const dispatch = useDispatch();
   const onSubmit = (values: Login) => {
-    if (values.email.indexOf('@') != -1) {
-      console.log(values);
+    if (values.email.indexOf('@') !== -1) {
+      console.log('signin: ', values);
+      dispatch(loginRequest(values));
     } else {
       alert('Incorrect e-mail');
     }
@@ -44,7 +48,7 @@ export const SignIn = () => {
             />
             <Text>Password</Text>
             <Field
-              name="password"
+              name="pass"
               render={({ input: { value, onChange } }) => (
                 <Input
                   className={Input}

@@ -1,8 +1,10 @@
-import { User } from './types';
-
 export const initialUser = {
-  id: 0,
-  email: '',
-  name: '',
-  token: '',
-} as User;
+  loading: false,
+  error: null,
+  user: {
+    id: 0,
+    email: '',
+    name: '',
+    token: '',
+  },
+};

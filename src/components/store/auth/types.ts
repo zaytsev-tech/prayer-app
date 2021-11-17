@@ -5,7 +5,7 @@ export interface User {
   token: string;
 }
 
-export interface LoginData {
+export interface Login {
   email: string;
   pass: string;
 }

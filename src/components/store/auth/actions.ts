@@ -1,6 +1,6 @@
-import { ActionTypes, Login, UserAction } from './action-types';
+import { createAction } from '@reduxjs/toolkit';
+import { User, Login } from './types';
 
-export const setToken = (payload: Login): UserAction => ({
-  type: ActionTypes.login,
-  payload,
-});
+export const loginRequest = createAction<Login>('USER/LOGIN/REQUEST');
+export const loginSuccess = createAction<User>('USER/LOGIN/SUCCESS');
+export const loginFailure = createAction('USER/LOGIN/FAILURE');
