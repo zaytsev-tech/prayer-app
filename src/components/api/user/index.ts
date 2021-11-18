@@ -1,1 +1,1 @@
-export { getUser } from './user-api';
+export { postUserLogin, postUserReg } from './user-api';

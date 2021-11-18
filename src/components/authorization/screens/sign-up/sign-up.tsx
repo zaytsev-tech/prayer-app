@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Field, Form } from 'react-final-form';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { DefButton, DefInput } from '../../../ui';
+import { useDispatch } from 'react-redux';
+import { regRequest } from '../../../store/auth/actions';
 
 interface Registration {
   email: string;
@@ -17,9 +19,10 @@ const initialValues: Registration = {
 };
 
 export const SignUp = () => {
+  const dispatch = useDispatch();
   const onSubmit = (values: Registration) => {
     if (values.email.indexOf('@') != -1) {
-      console.log(values);
+      dispatch(regRequest(values));
     } else {
       alert('Incorrect e-mail');
     }

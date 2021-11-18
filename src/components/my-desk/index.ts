@@ -1,1 +1,1 @@
-export {MyDesk} from './my-desk';
+export { MyDesk } from './my-desk';

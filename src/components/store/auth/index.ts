@@ -1,2 +1,3 @@
-export type { User, Login } from './types';
+export type { User, Login, Registration, Main } from './types';
 export { initialUser } from './state';
+export { Actions } from './actions';

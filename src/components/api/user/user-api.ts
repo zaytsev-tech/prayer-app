@@ -1,14 +1,25 @@
 import axios from 'axios';
-import { Login } from '../../store/auth';
+import { Login, Registration } from '../../store/auth';
 
-export const getUser = (values: Login) => {
+export const postUserLogin = (values: Login) => {
   return axios({
     method: 'POST',
     responseType: 'json',
     url: 'https://prayer.herokuapp.com/auth/sign-in',
-    data: values,
+    data: JSON.stringify(values),
     headers: {
-      accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+export const postUserReg = (values: Registration) => {
+  return axios({
+    method: 'POST',
+    responseType: 'json',
+    url: 'https://prayer.herokuapp.com/auth/sign-up',
+    data: JSON.stringify(values),
+    headers: {
       'Content-Type': 'application/json',
     },
   });

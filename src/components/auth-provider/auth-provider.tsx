@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistProvider } from '../store/persist';
 

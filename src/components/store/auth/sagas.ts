@@ -1,20 +1,39 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
-import { getUser } from '../../api/user';
-import { loginFailure, loginRequest, loginSuccess } from './actions';
+import { setError, setLogin } from './slice';
+import { postUserLogin, postUserReg } from '../../api/user';
+import { Actions } from './actions';
 
-function* getUserSaga(values) {
+function* loginUser(values) {
   try {
-    console.log('values: ', JSON.parse(values));
-    const response = yield call(getUser, values.payload);
-    console.log('user: ', response.data);
-    yield put(loginSuccess(response));
+    const response = yield call(postUserLogin, values.payload);
+    yield put(setLogin(response.data));
   } catch (e) {
-    yield put(loginFailure());
+    if (e instanceof Error) {
+      yield put(setError(e.message));
+    } else {
+      console.log('Error: ', e);
+      yield put(setError('unknown message'));
+    }
+  }
+}
+
+function* createUser(values) {
+  try {
+    const response = yield call(postUserReg, values.payload);
+    alert(`User "${response.data.name}" was created!`);
+  } catch (e) {
+    if (e instanceof Error) {
+      yield put(setError(e.message));
+    } else {
+      console.log('Error: ', e);
+      yield put(setError('unknown message'));
+    }
   }
 }
 
 export function* watcherUser() {
-  yield takeLatest('USER/LOGIN/REQUEST', getUserSaga);
+  yield takeLatest(Actions.loginRequest, loginUser);
+  yield takeLatest(Actions.regRequest, createUser);
 }
 
 // export function* rootSaga() {

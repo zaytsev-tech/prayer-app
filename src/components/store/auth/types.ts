@@ -1,3 +1,10 @@
+export interface Main {
+  loading: boolean;
+  error: Error;
+  user: User;
+  columns: [Column];
+}
+
 export interface User {
   id: number;
   email: string;
@@ -7,5 +14,17 @@ export interface User {
 
 export interface Login {
   email: string;
-  pass: string;
+  password: string;
+}
+
+export interface Registration {
+  email: string;
+  name: string;
+  password: string;
+}
+
+export interface Column {
+  title: string;
+  description: string;
+  id: number;
 }

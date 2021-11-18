@@ -1,6 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import { User, Login } from './types';
+import { Login, Registration } from './types';
 
-export const loginRequest = createAction<Login>('USER/LOGIN/REQUEST');
-export const loginSuccess = createAction<User>('USER/LOGIN/SUCCESS');
-export const loginFailure = createAction('USER/LOGIN/FAILURE');
+export enum Actions {
+  loginRequest = 'USER/LOGIN',
+  regRequest = 'USER/REGISTRATION',
+}
+
+export const loginRequest = createAction<Login>(Actions.loginRequest);
+export const regRequest = createAction<Registration>(Actions.regRequest);

@@ -1,9 +1,9 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { User } from '../auth';
-import { userReducer } from '../auth/reducers';
+import { userReducer } from '../auth/slice';
 import createSagaMiddleware from '@redux-saga/core';
 import { watcherUser } from '../auth/sagas';
 
@@ -15,7 +15,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  auth: userReducer,
+  auth: userReducer.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

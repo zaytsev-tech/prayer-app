@@ -11,10 +11,10 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Authorization } from './src/components/authorization';
 import { UserProvider } from './src/components/auth-provider';
 import { theme } from './src/styles';
 import { ThemeProvider } from 'styled-components';
+import { Basic } from './src/components/basic/';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +30,7 @@ const App = () => {
               headerTitleAlign: 'center',
             }}
           >
-            <Stack.Screen name="Prayer" component={Authorization} />
+            <Stack.Screen name="Prayer" component={Basic} />
           </Stack.Navigator>
         </NavigationContainer>
       </UserProvider>
