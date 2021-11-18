@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 
 export const Authorization = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Sign in" component={SignIn} />
       <Tab.Screen name="Sign up" component={SignUp} />
     </Tab.Navigator>

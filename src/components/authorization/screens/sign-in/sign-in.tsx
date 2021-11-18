@@ -5,6 +5,8 @@ import { Button, Text, TextInput, View } from 'react-native';
 import { DefButton, DefInput } from '../../../ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../../store/auth/actions';
+import { Main } from '../../../store/auth';
+import { Spinner } from '../../../ui/spinner';
 
 interface Login {
   email: string;
@@ -16,6 +18,10 @@ const initialValues: Login = {
   password: '',
 };
 
+interface SelectProp {
+  auth: Main;
+}
+
 export const SignIn = () => {
   const dispatch = useDispatch();
   const onSubmit = (values: Login) => {
@@ -25,48 +31,51 @@ export const SignIn = () => {
       alert('Incorrect e-mail');
     }
   };
-  const select = useSelector((state) => state);
+  const select = useSelector((state: SelectProp) => state.auth);
   console.log('SELECTOR: ', select);
-
   return (
     <View>
-      <Form initialValues={initialValues} onSubmit={onSubmit}>
-        {({ handleSubmit }) => (
-          <ViewForm>
-            <Text>E-mail</Text>
-            <Field
-              name="email"
-              render={({ input: { value, onChange } }) => (
-                <Input
-                  className={Input}
-                  textContentType="emailAddress"
-                  keyboardType="email-address"
-                  placeholder="Your e-mail"
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Text>Password</Text>
-            <Field
-              name="password"
-              render={({ input: { value, onChange } }) => (
-                <Input
-                  className={Input}
-                  textContentType="password"
-                  secureTextEntry={true}
-                  placeholder="Your password"
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Submit>
-              <DefButton title="Log in" onPress={handleSubmit} />
-            </Submit>
-          </ViewForm>
-        )}
-      </Form>
+      {select.loading ? (
+        <Spinner />
+      ) : (
+        <Form initialValues={initialValues} onSubmit={onSubmit}>
+          {({ handleSubmit }) => (
+            <ViewForm>
+              <Text>E-mail</Text>
+              <Field
+                name="email"
+                render={({ input: { value, onChange } }) => (
+                  <Input
+                    className={Input}
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
+                    placeholder="Your e-mail"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Text>Password</Text>
+              <Field
+                name="password"
+                render={({ input: { value, onChange } }) => (
+                  <Input
+                    className={Input}
+                    textContentType="password"
+                    secureTextEntry={true}
+                    placeholder="Your password"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Submit>
+                <DefButton title="Log in" onPress={handleSubmit} />
+              </Submit>
+            </ViewForm>
+          )}
+        </Form>
+      )}
     </View>
   );
 };
