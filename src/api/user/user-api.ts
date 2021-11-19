@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { Login, Registration } from '../../store/auth';
 
 export const postUserLogin = (values: Login) => {

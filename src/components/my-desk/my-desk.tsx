@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Main } from '../store/auth';
-import { Column, columnRequest, MainColumn } from '../store/columns';
+import { Main } from '../../store/auth';
+import { Column, columnRequest, MainColumn } from '../../store/columns';
+import { ColumnBlock } from '../../ui/column-block';
 
 interface UserSelectProp {
   auth: Main;
@@ -23,11 +24,7 @@ export const MyDesk = () => {
   return (
     <View>
       {Object.values(columns).map((column: Column) => {
-        return (
-          <Pressable key={column.id}>
-            <Text>{column.title}</Text>
-          </Pressable>
-        );
+        return <ColumnBlock key={column.id} column={column} />;
       })}
     </View>
   );

@@ -3,10 +3,8 @@ import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { Main } from '../../../store/auth';
-import { loginRequest } from '../../../store/auth/actions';
-import { DefButton, DefInput } from '../../../ui';
-import { Spinner } from '../../../ui/spinner';
+import { loginRequest, Main } from '../../../../store/auth';
+import { DefaultButton, DefInput, Spinner } from '../../../../ui';
 
 interface Login {
   email: string;
@@ -32,7 +30,6 @@ export const SignIn = () => {
     }
   };
   const select = useSelector((state: SelectProp) => state.auth);
-  console.log('SELECTOR: ', select);
   return (
     <View>
       {select.loading ? (
@@ -46,7 +43,6 @@ export const SignIn = () => {
                 name="email"
                 render={({ input: { value, onChange } }) => (
                   <Input
-                    className={Input}
                     textContentType="emailAddress"
                     keyboardType="email-address"
                     placeholder="Your e-mail"
@@ -60,7 +56,6 @@ export const SignIn = () => {
                 name="password"
                 render={({ input: { value, onChange } }) => (
                   <Input
-                    className={Input}
                     textContentType="password"
                     secureTextEntry={true}
                     placeholder="Your password"
@@ -70,7 +65,7 @@ export const SignIn = () => {
                 )}
               />
               <Submit>
-                <DefButton title="Log in" onPress={handleSubmit} />
+                <DefaultButton title="Log in" onPress={handleSubmit} />
               </Submit>
             </ViewForm>
           )}

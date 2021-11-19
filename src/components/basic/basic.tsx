@@ -2,9 +2,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 
+import { Main } from '../../store/auth';
 import { Authorization } from '../authorization';
 import { MyDesk } from '../my-desk';
-import { Main } from '../store/auth';
 
 const Stack = createNativeStackNavigator();
 

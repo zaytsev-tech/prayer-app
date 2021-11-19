@@ -1,10 +1,10 @@
 import { Field, Form } from 'react-final-form';
 import { Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { regRequest } from '../../../store/auth/actions';
-import { DefButton, DefInput } from '../../../ui';
+import { Main, regRequest } from '../../../../store/auth';
+import { DefaultButton, DefInput, Spinner } from '../../../../ui';
 
 interface Registration {
   email: string;
@@ -18,6 +18,10 @@ const initialValues: Registration = {
   password: '',
 };
 
+interface SelectProp {
+  auth: Main;
+}
+
 export const SignUp = () => {
   const dispatch = useDispatch();
   const onSubmit = (values: Registration) => {
@@ -28,57 +32,55 @@ export const SignUp = () => {
     }
   };
 
+  const select = useSelector((state: SelectProp) => state.auth);
   return (
     <View>
-      <Form initialValues={initialValues} onSubmit={onSubmit}>
-        {({ handleSubmit }) => (
-          <ViewForm>
-            <Text>E-mail</Text>
-            <Field
-              name="email"
-              render={({ input: { value, onChange } }) => (
-                <Input
-                  className={Input}
-                  textContentType="emailAddress"
-                  keyboardType="email-address"
-                  placeholder="Your e-mail"
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Text>Name</Text>
-            <Field
-              name="name"
-              render={({ input: { value, onChange } }) => (
-                <Input
-                  className={Input}
-                  placeholder="Your name"
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Text>Password</Text>
-            <Field
-              name="password"
-              render={({ input: { value, onChange } }) => (
-                <Input
-                  className={Input}
-                  textContentType="password"
-                  secureTextEntry={true}
-                  placeholder="Your password"
-                  value={value}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Submit>
-              <DefButton title="Sign up" onPress={handleSubmit} />
-            </Submit>
-          </ViewForm>
-        )}
-      </Form>
+      {select.loading ? (
+        <Spinner />
+      ) : (
+        <Form initialValues={initialValues} onSubmit={onSubmit}>
+          {({ handleSubmit }) => (
+            <ViewForm>
+              <Text>E-mail</Text>
+              <Field
+                name="email"
+                render={({ input: { value, onChange } }) => (
+                  <Input
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
+                    placeholder="Your e-mail"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Text>Name</Text>
+              <Field
+                name="name"
+                render={({ input: { value, onChange } }) => (
+                  <Input placeholder="Your name" value={value} onChange={onChange} />
+                )}
+              />
+              <Text>Password</Text>
+              <Field
+                name="password"
+                render={({ input: { value, onChange } }) => (
+                  <Input
+                    textContentType="password"
+                    secureTextEntry={true}
+                    placeholder="Your password"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Submit>
+                <DefaultButton title="Sign up" onPress={handleSubmit} />
+              </Submit>
+            </ViewForm>
+          )}
+        </Form>
+      )}
     </View>
   );
 };
