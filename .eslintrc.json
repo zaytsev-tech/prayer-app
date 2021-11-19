@@ -22,7 +22,6 @@
     },
     "ecmaVersion": 12,
     "sourceType": "module",
-    "tsconfigRootDir": "__dirname",
     "project": "tsconfig.eslint.json"
   },
   "env": {
@@ -56,6 +55,5 @@
     },
     "import/ignore": ["react-native", "babel.config.js"]
   },
-  "ignorePatterns": [".eslintrc.js"],
-  "eslint.validate": [ "javascript", "javascriptreact", "html", "typescriptreact" ]
+  "ignorePatterns": [".eslintrc.js"]
 }
