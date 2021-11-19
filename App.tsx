@@ -7,12 +7,12 @@
  *
  * @format
  */
-import React from 'react';
+
+import { ThemeProvider } from 'styled-components';
 
 import { UserProvider } from './src/components/auth-provider';
-import { theme } from './src/styles';
-import { ThemeProvider } from 'styled-components';
 import { Basic } from './src/components/basic/';
+import { theme } from './src/styles';
 
 const App = () => {
   return (

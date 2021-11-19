@@ -1,8 +1,8 @@
 export interface Main {
   loading: boolean;
+  auth: boolean;
   error: Error;
   user: User;
-  columns: [Column];
 }
 
 export interface User {
@@ -21,10 +21,4 @@ export interface Registration {
   email: string;
   name: string;
   password: string;
-}
-
-export interface Column {
-  title: string;
-  description: string;
-  id: number;
 }

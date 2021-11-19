@@ -1,7 +1,8 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { setError, setLoading, setLogin } from './slice';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { postUserLogin, postUserReg } from '../../api/user';
-import { Actions } from './actions';
+import { UserActions } from './actions';
+import { setError, setLoading, setLogin } from './slice';
 
 function* loginUser(values) {
   try {
@@ -38,6 +39,6 @@ function* createUser(values) {
 }
 
 export function* watcherUser() {
-  yield takeLatest(Actions.loginRequest, loginUser);
-  yield takeLatest(Actions.regRequest, createUser);
+  yield takeLatest(UserActions.loginRequest, loginUser);
+  yield takeLatest(UserActions.regRequest, createUser);
 }

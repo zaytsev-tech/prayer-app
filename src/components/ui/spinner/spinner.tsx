@@ -1,6 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
 import { ActivityIndicator, View } from 'react-native';
+import styled from 'styled-components';
 
 export const Spinner = () => {
   return (

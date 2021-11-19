@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { Authorization } from '../authorization';
 import { MyDesk } from '../my-desk';
 import { Main } from '../store/auth';
@@ -23,7 +23,7 @@ export const Basic = () => {
           headerTitleAlign: 'center',
         }}
       >
-        {profile.user.name !== '' ? (
+        {profile.auth === true ? (
           <Stack.Screen name="My Desk" component={MyDesk} />
         ) : (
           <Stack.Screen name="Prayer" component={Authorization} />

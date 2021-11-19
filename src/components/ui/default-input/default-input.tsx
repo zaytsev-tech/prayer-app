@@ -1,6 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
 import { TextInput } from 'react-native';
+import styled from 'styled-components';
 
 export const DefInput = ({ ...props }) => {
   return <Input {...props} />;

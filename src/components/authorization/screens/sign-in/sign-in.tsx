@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Field, Form } from 'react-final-form';
-import { Button, Text, TextInput, View } from 'react-native';
-import { DefButton, DefInput } from '../../../ui';
+import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest } from '../../../store/auth/actions';
+import styled from 'styled-components';
+
 import { Main } from '../../../store/auth';
+import { loginRequest } from '../../../store/auth/actions';
+import { DefButton, DefInput } from '../../../ui';
 import { Spinner } from '../../../ui/spinner';
 
 interface Login {

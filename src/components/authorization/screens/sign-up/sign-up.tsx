@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Field, Form } from 'react-final-form';
 import { Text, View } from 'react-native';
-import { DefButton, DefInput } from '../../../ui';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
 import { regRequest } from '../../../store/auth/actions';
+import { DefButton, DefInput } from '../../../ui';
 
 interface Registration {
   email: string;
