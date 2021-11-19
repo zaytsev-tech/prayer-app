@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 
 import { Main } from '../../store/auth';
+import { theme } from '../../styles';
+import { IconPlus } from '../../ui';
 import { Authorization } from '../authorization';
 import { MyDesk } from '../my-desk';
 
@@ -21,6 +23,9 @@ export const Basic = () => {
           headerStyle: { backgroundColor: '#FFF' },
           headerTintColor: '#514D47',
           headerTitleAlign: 'center',
+          headerRight: () => (
+            <IconPlus width={25} height={25} color={theme.colors.blue} />
+          ),
         }}
       >
         {profile.auth === true ? (
