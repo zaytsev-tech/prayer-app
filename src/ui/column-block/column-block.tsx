@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
 import { Column } from '../../store/columns';
@@ -16,7 +16,7 @@ export const ColumnBlock: FC<ColumnBlockProp> = ({ column }) => {
   );
 };
 
-const Block = styled(Pressable)`
+const Block = styled(TouchableOpacity)`
   background: ${({ theme: { colors } }) => colors.white};
   border: 1px solid #e5e5e5;
   box-sizing: border-box;

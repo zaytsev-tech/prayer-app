@@ -1,4 +1,3 @@
-import { AnyObject } from 'final-form';
 import { FC } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
