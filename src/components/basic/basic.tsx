@@ -23,13 +23,18 @@ export const Basic = () => {
           headerStyle: { backgroundColor: '#FFF' },
           headerTintColor: '#514D47',
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <IconPlus width={25} height={25} color={theme.colors.blue} />
-          ),
         }}
       >
         {profile.auth === true ? (
-          <Stack.Screen name="My Desk" component={MyDesk} />
+          <Stack.Screen
+            name="My Desk"
+            component={MyDesk}
+            options={{
+              headerRight: () => (
+                <IconPlus width={25} height={25} color={theme.colors.blue} />
+              ),
+            }}
+          />
         ) : (
           <Stack.Screen name="Prayer" component={Authorization} />
         )}
