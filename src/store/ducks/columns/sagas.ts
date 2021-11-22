@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 
-import { getColumns } from '../../api/column';
-import { setError, setLoading } from '../auth/slice';
+import { getColumns } from '../../../api/column';
+import { setError, setLoading } from '../../ducks/auth/slice';
 import { ColumnActions } from './actions';
 import { setColumns } from './slice';
 

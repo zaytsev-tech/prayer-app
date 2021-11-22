@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { postUserLogin, postUserReg } from '../../api/user';
+import { postUserLogin, postUserReg } from '../../../api/user';
 import { UserActions } from './actions';
 import { setError, setLoading, setLogin } from './slice';
 
