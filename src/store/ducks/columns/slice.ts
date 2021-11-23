@@ -12,7 +12,10 @@ export const columnReducer = createSlice({
         return obj;
       }, {});
     },
+    addColumn(state, action) {
+      return { ...state, [action.payload.id]: action.payload };
+    },
   },
 });
 
-export const { setColumns } = columnReducer.actions;
+export const { setColumns, addColumn } = columnReducer.actions;

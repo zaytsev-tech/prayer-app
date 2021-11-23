@@ -1,8 +1,8 @@
 export interface Column {
   title: string;
   description: string;
-  id: number;
-  userId: number;
+  id?: number;
+  userId?: number;
 }
 
 export interface MainColumn {

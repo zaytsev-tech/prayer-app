@@ -35,6 +35,8 @@ export const SignUp = () => {
             const errors: Registration = { email: '', name: '', password: '' };
             if (values.email && values.email.indexOf('@') === -1) {
               errors.email = 'Incorrect e-mail';
+            } else {
+              return {};
             }
             return errors;
           }}

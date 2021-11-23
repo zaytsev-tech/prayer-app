@@ -1,11 +1,10 @@
-import { AnyObject } from 'immer/dist/internal';
 import { FC } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import styled from 'styled-components/native';
 
 interface DefaultButtonProps {
   title: string;
-  onPress: () => Promise<AnyObject | undefined> | undefined;
+  onPress: () => void;
 }
 
 export const DefaultButton: FC<DefaultButtonProps> = ({ title, onPress }) => {
@@ -16,7 +15,7 @@ export const DefaultButton: FC<DefaultButtonProps> = ({ title, onPress }) => {
   );
 };
 
-const ButtonBlock = styled(TouchableOpacity)`
+const ButtonBlock = styled(Pressable)`
   height: 30px;
   background: #bfb393;
   box-shadow: 0px 2px 15px rgba(66, 78, 117, 0.1);

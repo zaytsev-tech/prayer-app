@@ -1,1 +1,1 @@
-export { getColumns } from './column-api';
+export { getColumns, postColumn } from './column-api';

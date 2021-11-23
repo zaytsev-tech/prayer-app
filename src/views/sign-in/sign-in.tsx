@@ -33,16 +33,19 @@ export const SignIn = () => {
         <Spinner />
       ) : (
         <Form
-          initialValues={initialValues}
           onSubmit={onSubmit}
+          initialValues={initialValues}
           validate={(values: Login) => {
             const errors: Login = { email: '', password: '' };
             if (values.email && values.email.indexOf('@') === -1) {
               errors.email = 'Incorrect e-mail';
+            } else {
+              return {};
             }
             return errors;
           }}
-          render={({ handleSubmit }) => (
+        >
+          {({ handleSubmit }) => (
             <ViewForm>
               <Text>E-mail</Text>
               <Field
@@ -78,7 +81,7 @@ export const SignIn = () => {
               </Submit>
             </ViewForm>
           )}
-        />
+        </Form>
       )}
     </View>
   );

@@ -9,3 +9,15 @@ export const getColumns = (token: string) => {
     },
   });
 };
+
+export const postColumn = ({ token, column }) => {
+  return axios({
+    method: 'POST',
+    responseType: 'json',
+    url: 'https://prayer.herokuapp.com/columns/',
+    data: column,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
