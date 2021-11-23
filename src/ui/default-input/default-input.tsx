@@ -1,7 +1,8 @@
-import { TextInput } from 'react-native';
+import { FC } from 'react';
+import { TextInput, TextInputProps } from 'react-native';
 import styled from 'styled-components';
 
-export const DefInput = ({ ...props }) => {
+export const DefaultInput: FC<TextInputProps> = (props) => {
   return <Input {...props} />;
 };
 

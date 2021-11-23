@@ -41,7 +41,9 @@
     "prettier/prettier": "error",
     "global-require": "off",
     "simple-import-sort/imports": "error",
-    "import/first": "off"
+    "import/first": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"]
   },
   "settings": {
     "react": {

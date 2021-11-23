@@ -23,6 +23,7 @@ interface SelectProp {
 export const SignIn = () => {
   const dispatch = useDispatch();
   const onSubmit = (values: Login) => {
+    console.log(1);
     dispatch(loginRequest(values));
   };
   const select = useSelector((state: SelectProp) => state.auth);
@@ -41,8 +42,7 @@ export const SignIn = () => {
             }
             return errors;
           }}
-        >
-          {({ handleSubmit }) => (
+          render={({ handleSubmit }) => (
             <ViewForm>
               <Text>E-mail</Text>
               <Field
@@ -78,7 +78,7 @@ export const SignIn = () => {
               </Submit>
             </ViewForm>
           )}
-        </Form>
+        />
       )}
     </View>
   );

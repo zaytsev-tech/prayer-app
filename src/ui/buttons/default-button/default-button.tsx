@@ -1,16 +1,17 @@
+import { AnyObject } from 'immer/dist/internal';
 import { FC } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 interface DefaultButtonProps {
   title: string;
-  onPress: () => void;
+  onPress: () => Promise<AnyObject | undefined> | undefined;
 }
 
-export const DefaultButton: FC<DefaultButtonProps> = ({ ...props }) => {
+export const DefaultButton: FC<DefaultButtonProps> = ({ title, onPress }) => {
   return (
-    <ButtonBlock onPress={props.onPress}>
-      <ButtonText>{props.title}</ButtonText>
+    <ButtonBlock onPress={onPress}>
+      <ButtonText>{title}</ButtonText>
     </ButtonBlock>
   );
 };

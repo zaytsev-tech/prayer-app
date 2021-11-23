@@ -1,9 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { ThemeContext } from 'styled-components';
 
-import { Main } from '../../store/auth';
-import { theme } from '../../styles';
+import { UserState } from '../../store/ducks/auth';
 import { IconPlus } from '../../ui';
 import { Authorization } from '../authorization';
 import { MyDesk } from '../my-desk';
@@ -11,17 +12,18 @@ import { MyDesk } from '../my-desk';
 const Stack = createNativeStackNavigator();
 
 interface Profile {
-  auth: Main;
+  auth: UserState;
 }
 
 export const Basic = () => {
   const profile = useSelector((state: Profile) => state.auth);
+  const theme = useContext(ThemeContext);
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#FFF' },
-          headerTintColor: '#514D47',
+          headerStyle: { backgroundColor: theme.colors.white },
+          headerTintColor: theme.colors.black,
           headerTitleAlign: 'center',
         }}
       >

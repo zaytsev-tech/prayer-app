@@ -1,4 +1,4 @@
-export interface Main {
+export interface UserState {
   loading: boolean;
   auth: boolean;
   error: Error;
@@ -10,11 +10,6 @@ export interface User {
   email: string;
   name: string;
   token: string;
-}
-
-export interface Login {
-  email: string;
-  password: string;
 }
 
 export interface Registration {

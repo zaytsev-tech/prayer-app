@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { Login, Registration } from './types';
+import { Login } from './default-values';
+import { Registration } from './types';
 
 export enum UserActions {
   loginRequest = 'USER/LOGIN',

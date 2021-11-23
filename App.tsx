@@ -10,16 +10,16 @@
 
 import { ThemeProvider } from 'styled-components';
 
-import { UserProvider } from './src/components/auth-provider';
 import { Basic } from './src/components/basic/';
+import { StoreProvider } from './src/components/store-provider';
 import { theme } from './src/styles';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <UserProvider>
+      <StoreProvider>
         <Basic />
-      </UserProvider>
+      </StoreProvider>
     </ThemeProvider>
   );
 };

@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Main } from '../../store/auth';
-import { Column, columnRequest, MainColumn } from '../../store/columns';
+import { UserState } from '../../store/ducks/auth';
+import { Column, columnRequest, MainColumn } from '../../store/ducks/columns';
 import { ColumnBlock } from '../../ui/column-block';
 
 interface UserSelectProp {
-  auth: Main;
+  auth: UserState;
 }
 
 interface ColumnsSelectProp {

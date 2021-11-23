@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { SignIn } from './screens/sign-in';
-import { SignUp } from './screens/sign-up';
+import { SignIn } from '../../views/sign-in';
+import { SignUp } from '../../views/sign-up';
 
 const Tab = createBottomTabNavigator();
 

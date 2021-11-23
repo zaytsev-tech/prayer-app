@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
-import { Column } from '../../store/columns';
+import { Column } from '../../store/ducks/columns';
 
 interface ColumnBlockProp {
   column: Column;

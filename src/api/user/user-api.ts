@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Login, Registration } from '../../store/auth';
+import { Login, Registration } from '../../store/ducks/auth';
 
 export const postUserLogin = (values: Login) => {
   return axios({

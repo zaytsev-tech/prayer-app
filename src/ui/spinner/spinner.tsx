@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import styled from 'styled-components';
+import { ThemeContext } from 'styled-components';
 
 export const Spinner = () => {
+  const theme = useContext(ThemeContext);
   return (
     <Loader>
-      <Circle size="large" color="#BFB393" />
+      <Circle size="large" color={theme.colors.brown} />
     </Loader>
   );
 };

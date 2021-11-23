@@ -1,1 +1,1 @@
-export { DefInput } from './default-input';
+export { DefaultInput } from './default-input';
