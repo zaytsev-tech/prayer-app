@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { loginRequest, Main } from '../../../../store/auth';
-import { DefaultButton, DefInput, Spinner } from '../../../../ui';
+import { loginRequest, UserState } from '../../store/ducks/auth';
+import { DefaultButton, DefaultInput, Spinner } from '../../ui';
 
 interface Login {
   email: string;
@@ -17,17 +17,13 @@ const initialValues: Login = {
 };
 
 interface SelectProp {
-  auth: Main;
+  auth: UserState;
 }
 
 export const SignIn = () => {
   const dispatch = useDispatch();
   const onSubmit = (values: Login) => {
-    if (values.email.indexOf('@') !== -1) {
-      dispatch(loginRequest(values));
-    } else {
-      alert('Incorrect e-mail');
-    }
+    dispatch(loginRequest(values));
   };
   const select = useSelector((state: SelectProp) => state.auth);
   return (
@@ -35,20 +31,33 @@ export const SignIn = () => {
       {select.loading ? (
         <Spinner />
       ) : (
-        <Form initialValues={initialValues} onSubmit={onSubmit}>
+        <Form
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validate={(values: Login) => {
+            const errors: Login = { email: '', password: '' };
+            if (values.email && values.email.indexOf('@') === -1) {
+              errors.email = 'Incorrect e-mail';
+            }
+            return errors;
+          }}
+        >
           {({ handleSubmit }) => (
             <ViewForm>
               <Text>E-mail</Text>
               <Field
                 name="email"
-                render={({ input: { value, onChange } }) => (
-                  <Input
-                    textContentType="emailAddress"
-                    keyboardType="email-address"
-                    placeholder="Your e-mail"
-                    value={value}
-                    onChange={onChange}
-                  />
+                render={({ input: { value, onChange }, meta }) => (
+                  <>
+                    <Input
+                      textContentType="emailAddress"
+                      keyboardType="email-address"
+                      placeholder="Your e-mail"
+                      value={value}
+                      onChange={onChange}
+                    />
+                    {meta.error ? <ErrorMessage>{meta.error}</ErrorMessage> : <></>}
+                  </>
                 )}
               />
               <Text>Password</Text>
@@ -79,11 +88,17 @@ const ViewForm = styled(View)`
   margin: 10px;
 `;
 
-const Input = styled(DefInput)`
+const Input = styled(DefaultInput)`
   margin-bottom: 10px;
 `;
 
 const Submit = styled(View)`
   padding-top: 10px;
   margin: 30px;
+`;
+
+const ErrorMessage = styled(Text)`
+  color: ${({ theme: { colors } }) => colors.red};
+  margin-bottom: 10px;
+  margin-top: -5px;
 `;
