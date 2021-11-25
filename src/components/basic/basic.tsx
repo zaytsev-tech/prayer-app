@@ -1,13 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext } from 'react';
-import { TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
-import { ThemeContext } from 'styled-components';
 
 import { UserState } from '../../store/ducks/auth';
-import { IconPlus } from '../../ui';
-import { AddColumn } from '../add-column/add-column';
 import { Authorization } from '../authorization';
 import { MyDesk } from '../my-desk';
 
@@ -19,31 +14,11 @@ interface Profile {
 
 export const Basic = () => {
   const profile = useSelector((state: Profile) => state.auth);
-  const theme = useContext(ThemeContext);
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: theme.colors.white },
-          headerTintColor: theme.colors.black,
-          headerTitleAlign: 'center',
-        }}
-      >
+      <Stack.Navigator>
         {profile.auth === true ? (
-          <>
-            <Stack.Screen
-              name="My Desk"
-              component={MyDesk}
-              options={({ navigation: { navigate } }) => ({
-                headerRight: () => (
-                  <TouchableOpacity onPress={() => navigate('Add Column')}>
-                    <IconPlus width={25} height={25} color={theme.colors.blue} />
-                  </TouchableOpacity>
-                ),
-              })}
-            />
-            <Stack.Screen name="Add Column" component={AddColumn} />
-          </>
+          <Stack.Screen options={{ headerShown: false }} name="Desk" component={MyDesk} />
         ) : (
           <Stack.Screen name="Prayer" component={Authorization} />
         )}
