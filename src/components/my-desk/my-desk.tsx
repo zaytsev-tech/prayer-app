@@ -28,7 +28,7 @@ export const MyDesk = () => {
     <StackDesk.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: theme.colors.white },
-        headerTintColor: theme.colors.black,
+        headerTintColor: theme.colors.textBlack,
         headerTitleAlign: 'center',
       }}
     >

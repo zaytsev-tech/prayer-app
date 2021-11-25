@@ -31,7 +31,7 @@ export const ColumnBlock: FC<BlockProps> = ({ column }) => {
 
 const Block = styled(TouchableOpacity)`
   background: ${({ theme: { colors } }) => colors.white};
-  border: 1px solid #e5e5e5;
+  border: 1px solid ${({ theme: { colors } }) => colors.borderBlack};
   box-sizing: border-box;
   border-radius: 4px;
   margin: 2%;
