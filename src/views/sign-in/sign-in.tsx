@@ -23,7 +23,6 @@ interface SelectProp {
 export const SignIn = () => {
   const dispatch = useDispatch();
   const onSubmit = (values: Login) => {
-    console.log(1);
     dispatch(loginRequest(values));
   };
   const select = useSelector((state: SelectProp) => state.auth);

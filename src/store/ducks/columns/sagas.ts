@@ -26,7 +26,6 @@ function* setColumnSaga(value) {
   try {
     yield put(setLoading(true));
     const response = yield call(postColumn, value.payload);
-    console.log('ddata: ', response);
     yield put(addColumn(response.data));
   } catch (e) {
     if (e instanceof Error) {

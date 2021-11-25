@@ -26,9 +26,7 @@ function* getPrayersSaga(value) {
 function* setPrayerSaga(value) {
   try {
     yield put(setLoading(true));
-    console.log('vvalue: ', value);
     const response = yield call(postPrayer, value.payload);
-    console.log('ddata: ', response.data);
     yield put(addPrayer(response.data));
   } catch (e) {
     if (e instanceof Error) {
