@@ -4,7 +4,7 @@ export interface Prayer {
   description: string;
   checked: boolean;
   columnId?: number;
-  commentsIds: Record<string, Comment>;
+  commentsIds?: Record<string, Comment>;
 }
 
 export interface Comment {
@@ -12,4 +12,10 @@ export interface Comment {
   created: string;
   prayerId: number;
   userId: number;
+}
+
+export interface FormInputPrayer {
+  columnId: number;
+  title: string;
+  token: string;
 }

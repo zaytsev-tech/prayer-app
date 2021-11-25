@@ -1,8 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export enum ColumnActions {
-  columnRequest = 'COLUMN/GET',
-  setColumnRequest = 'COLUMN/POST',
+import { Prayer } from '.';
+
+export enum PrayerActions {
+  prayerRequest = 'PRAYER/GET',
+  setPrayerRequest = 'PRAYER/POST',
 }
 
-export const columnRequest = createAction<string>(ColumnActions.columnRequest);
+export const prayerRequest = createAction<string>(PrayerActions.prayerRequest);
+export const setPrayerRequest = createAction<Prayer>(PrayerActions.setPrayerRequest);

@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { initialPrayers } from './state';
+import { initialPrayer } from './state';
 
-export const columnReducer = createSlice({
+export const prayerReducer = createSlice({
   name: 'columns',
-  initialState: initialPrayers,
+  initialState: initialPrayer,
   reducers: {
-    setColumns(state, action) {
+    setPrayers(state, action) {
       return action.payload.reduce((obj, curr) => {
         obj[curr.id] = curr;
         return obj;
       }, {});
     },
-    addColumn(state, action) {
+    addPrayer(state, action) {
       return { ...state, [action.payload.id]: action.payload };
     },
   },
 });
 
-export const { setColumns, addColumn } = columnReducer.actions;
+export const { setPrayers, addPrayer } = prayerReducer.actions;

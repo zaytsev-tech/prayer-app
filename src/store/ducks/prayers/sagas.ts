@@ -1,15 +1,16 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 
-import { getColumns, postColumn } from '../../../api/column';
+import { getPrayers } from '../../../api/prayer';
+import { postPrayer } from '../../../api/prayer/prayer-api';
 import { setError, setLoading } from '../../ducks/auth/slice';
-import { ColumnActions } from './actions';
-import { addColumn, setColumns } from './slice';
+import { PrayerActions } from './actions';
+import { addPrayer, setPrayers } from './slice';
 
-function* getColumnsSaga(value) {
+function* getPrayersSaga(value) {
   try {
     yield put(setLoading(true));
-    const response = yield call(getColumns, value.payload);
-    yield put(setColumns(response.data));
+    const response = yield call(getPrayers, value.payload);
+    yield put(setPrayers(response.data));
   } catch (e) {
     if (e instanceof Error) {
       yield put(setError(e.message));
@@ -22,12 +23,13 @@ function* getColumnsSaga(value) {
   }
 }
 
-function* setColumnSaga(value) {
+function* setPrayerSaga(value) {
   try {
     yield put(setLoading(true));
-    const response = yield call(postColumn, value.payload);
-    console.log('ddata: ', response);
-    yield put(addColumn(response.data));
+    console.log('vvalue: ', value);
+    const response = yield call(postPrayer, value.payload);
+    console.log('ddata: ', response.data);
+    yield put(addPrayer(response.data));
   } catch (e) {
     if (e instanceof Error) {
       yield put(setError(e.message));
@@ -40,7 +42,7 @@ function* setColumnSaga(value) {
   }
 }
 
-export function* watcherColumns() {
-  yield takeLatest(ColumnActions.columnRequest, getColumnsSaga);
-  yield takeLatest(ColumnActions.setColumnRequest, setColumnSaga);
+export function* watcherPrayers() {
+  yield takeLatest(PrayerActions.prayerRequest, getPrayersSaga);
+  yield takeLatest(PrayerActions.setPrayerRequest, setPrayerSaga);
 }

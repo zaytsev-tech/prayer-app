@@ -1,4 +1,4 @@
-export const initialPrayers = {
+export const initialPrayer = {
   id: 0,
   title: '',
   description: '',

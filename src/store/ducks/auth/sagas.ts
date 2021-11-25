@@ -7,9 +7,7 @@ import { setError, setLoading, setLogin } from './slice';
 function* loginUser(values) {
   try {
     yield put(setLoading(true));
-    console.log('values LU: ', values);
     const response = yield call(postUserLogin, values.payload);
-    console.log('response: ', response.data);
     yield put(setLogin(response.data));
   } catch (e) {
     if (e instanceof Error) {
