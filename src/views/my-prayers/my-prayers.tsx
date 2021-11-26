@@ -20,10 +20,9 @@ interface UserSelectProp {
   auth: UserState;
 }
 
-const theme = useContext(ThemeContext);
-
 export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
   const dispatch = useDispatch();
+  const theme = useContext(ThemeContext);
   const profile = useSelector((state: UserSelectProp) => state.auth);
 
   const initialValue = {
