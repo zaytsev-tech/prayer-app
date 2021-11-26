@@ -15,7 +15,10 @@ export const prayerReducer = createSlice({
     addPrayer(state, action) {
       return { ...state, [action.payload.id]: action.payload };
     },
+    deletePrayer(state, action) {
+      delete state[action.payload];
+    },
   },
 });
 
-export const { setPrayers, addPrayer } = prayerReducer.actions;
+export const { setPrayers, addPrayer, deletePrayer } = prayerReducer.actions;

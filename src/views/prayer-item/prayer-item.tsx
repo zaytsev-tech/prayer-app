@@ -1,67 +1,84 @@
 import CheckBox from '@react-native-community/checkbox';
 import { FC, useContext } from 'react';
 import { Field, Form } from 'react-final-form';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 import { ThemeContext } from 'styled-components';
 import styled from 'styled-components';
 
 import { Prayer } from '../../store/ducks/prayers';
+import { ItemDeleteButton } from '../../ui/buttons/item-delete-button';
 import { IconLineUp, IconPray, IconUser } from '../../ui/icons';
 
 interface PrayerItemProp {
   prayer: Prayer;
+  token: string;
 }
 
-export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
+export const PrayerItem: FC<PrayerItemProp> = ({ prayer, token }) => {
   const theme = useContext(ThemeContext);
   const onSubmit = (value) => {
     console.log(value);
   };
   return (
-    <Form
-      onSubmit={onSubmit}
-      initialValues={prayer.checked}
-      render={({ handleSubmit }) => (
-        <Container>
-          <ViewPrayerItem>
-            <IconLineUp width={25} height={25} color={theme.colors.blue} />
-            <Field
-              name="checked"
-              render={({ input: { value, onChange } }) => (
-                <CheckBox value={value} onValueChange={onChange} />
-              )}
-            />
-            <TextItem>{prayer.title}</TextItem>
-            <ViewIcons>
-              <ViewComments>
-                <IconUser width={25} height={25} color={theme.colors.blue} />
-                <TextItem>{Object.values(prayer.commentsIds || {}).length}</TextItem>
-              </ViewComments>
-              <ViewPrayers>
-                <IconPray width={25} height={25} color={theme.colors.blue} />
-                <TextItem>123</TextItem>
-              </ViewPrayers>
-            </ViewIcons>
-          </ViewPrayerItem>
-        </Container>
+    <Swipeable
+      renderRightActions={() => (
+        <ItemDeleteButton prayerId={prayer.id || 0} token={token} />
       )}
-    />
+    >
+      <Form
+        onSubmit={onSubmit}
+        initialValues={prayer.checked}
+        render={({ handleSubmit }) => (
+          <Container>
+            <ViewPrayerItem>
+              <ViewLeft>
+                <IconLineUp width={25} height={25} color={theme.colors.blue} />
+                <Field
+                  name="checked"
+                  render={({ input: { value, onChange } }) => (
+                    <CheckBox value={value} onValueChange={onChange} />
+                  )}
+                />
+                <TextItem>{prayer.title}</TextItem>
+              </ViewLeft>
+              <ViewIcons>
+                <ViewComments>
+                  <IconUser width={25} height={25} color={theme.colors.blue} />
+                  <TextItem>{Object.values(prayer.commentsIds || {}).length}</TextItem>
+                </ViewComments>
+                <ViewPrayers>
+                  <IconPray width={25} height={25} color={theme.colors.blue} />
+                  <TextItem>123</TextItem>
+                </ViewPrayers>
+              </ViewIcons>
+            </ViewPrayerItem>
+          </Container>
+        )}
+      />
+    </Swipeable>
   );
 };
 
-const Container = styled(Text)`
-  margin: 10px;
-  width: 100%;
-  align-self: stretch;
+const Container = styled(TouchableOpacity)`
+  margin-right: 10px;
+  margin-left: 10px;
   height: 50px;
   border-bottom-color: ${({ theme: { colors } }) => colors.borderBlack};
   border-bottom-width: 1px;
   overflow: hidden;
 `;
 
-const ViewPrayerItem = styled(View)`
+const ViewLeft = styled(View)`
   flex-direction: row;
-  justify-content: center;
+`;
+
+const ViewPrayerItem = styled(View)`
+  flex: 1;
+  top: 10px
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const ViewIcons = styled(View)`

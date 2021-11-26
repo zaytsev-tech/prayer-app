@@ -15,7 +15,10 @@ export const userReducer = createSlice({
     setError(state, action) {
       return (state.error = action.payload);
     },
+    setLogout() {
+      return initialUser;
+    },
   },
 });
 
-export const { setLogin, setError, setLoading } = userReducer.actions;
+export const { setLogin, setError, setLoading, setLogout } = userReducer.actions;

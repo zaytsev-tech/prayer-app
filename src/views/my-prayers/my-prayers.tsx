@@ -65,7 +65,9 @@ export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
       ></Form>
       {Object.values(prayers || {}).map((prayer) => {
         if (prayer.columnId == column.id) {
-          return <PrayerItem key={prayer.id} prayer={prayer} />;
+          return (
+            <PrayerItem key={prayer.id} prayer={prayer} token={profile.user.token} />
+          );
         }
       })}
     </View>

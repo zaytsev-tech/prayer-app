@@ -22,10 +22,10 @@ interface PrayersProps {
 }
 
 const Tab = createMaterialTopTabNavigator();
-const theme = useContext(ThemeContext);
 
 export const Todo: FC<TodoProps> = ({ route }) => {
   const dispatch = useDispatch();
+  const theme = useContext(ThemeContext);
   const profile = useSelector((state: UserSelectProp) => state.auth);
   const prayers = useSelector((state: PrayersProps) => state.prayers);
   useEffect(() => {
@@ -49,7 +49,9 @@ export const Todo: FC<TodoProps> = ({ route }) => {
       <Tab.Screen name="My prayers">
         {() => <MyPrayers column={route.params.column} prayers={prayers} />}
       </Tab.Screen>
-      <Tab.Screen name="Subscribed" component={Subscribed} />
+      <Tab.Screen name="Subscribed">
+        {() => <Subscribed column={route.params.column} prayers={prayers} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };

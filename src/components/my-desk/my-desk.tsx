@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 
-import { UserState } from '../../store/ducks/auth';
+import { setLogout, UserState } from '../../store/ducks/auth';
 import { columnRequest } from '../../store/ducks/columns';
 import { IconGear, IconPlus } from '../../ui/icons';
 import { AddColumn } from '../add-column';
@@ -47,10 +47,14 @@ export const MyDesk = () => {
       <StackDesk.Screen
         name="To do"
         component={Todo}
-        options={({ navigation: { navigate } }) => ({
+        options={() => ({
           headerLeft: () => <View></View>,
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigate('To do')}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(setLogout());
+              }}
+            >
               <IconGear width={25} height={25} color={theme.colors.blue} />
             </TouchableOpacity>
           ),
