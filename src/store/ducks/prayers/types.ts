@@ -19,8 +19,3 @@ export interface FormInputPrayer {
   title: string;
   token: string;
 }
-
-export interface DeletePrayer {
-  prayerId: number;
-  token: string;
-}

@@ -25,7 +25,7 @@ export const AddColumn = ({ navigation: { goBack } }) => {
   const dispatch = useDispatch();
   const profile = useSelector((state: UserSelectProp) => state.auth);
   const onSubmit = (values: Column) => {
-    dispatch(setColumnRequest({ token: profile.user.token, column: values }));
+    dispatch(setColumnRequest(values));
     goBack();
   };
   return (

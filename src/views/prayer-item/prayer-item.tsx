@@ -12,20 +12,15 @@ import { IconLineUp, IconPray, IconUser } from '../../ui/icons';
 
 interface PrayerItemProp {
   prayer: Prayer;
-  token: string;
 }
 
-export const PrayerItem: FC<PrayerItemProp> = ({ prayer, token }) => {
+export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
   const theme = useContext(ThemeContext);
   const onSubmit = (value) => {
     console.log(value);
   };
   return (
-    <Swipeable
-      renderRightActions={() => (
-        <ItemDeleteButton prayerId={prayer.id || 0} token={token} />
-      )}
-    >
+    <Swipeable renderRightActions={() => <ItemDeleteButton prayerId={prayer.id || 0} />}>
       <Form
         onSubmit={onSubmit}
         initialValues={prayer.checked}

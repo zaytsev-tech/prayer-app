@@ -1,27 +1,10 @@
-import axios from 'axios';
-
 import { Login, Registration } from '../../store/ducks/auth';
-
-export const postUserLogin = (values: Login) => {
-  return axios({
-    method: 'POST',
-    responseType: 'json',
-    url: 'https://prayer.herokuapp.com/auth/sign-in',
-    data: JSON.stringify(values),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-};
+import { apiAuth } from '../base-axios';
 
 export const postUserReg = (values: Registration) => {
-  return axios({
-    method: 'POST',
-    responseType: 'json',
-    url: 'https://prayer.herokuapp.com/auth/sign-up',
-    data: JSON.stringify(values),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  return apiAuth.post('/auth/sign-up', values);
+};
+
+export const postUserLogin = (values: Login) => {
+  return apiAuth.post('/auth/sign-in', values);
 };

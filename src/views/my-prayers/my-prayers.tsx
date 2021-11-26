@@ -1,10 +1,10 @@
 import { FC, useContext } from 'react';
 import { Field, Form } from 'react-final-form';
 import { TextInput, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled, { ThemeContext } from 'styled-components';
 
-import { UserState } from '../../store/ducks/auth';
+import { selectToken } from '../../store/ducks/auth';
 import { Column } from '../../store/ducks/columns';
 import { Prayer } from '../../store/ducks/prayers';
 import { setPrayerRequest } from '../../store/ducks/prayers/actions';
@@ -16,19 +16,14 @@ interface MyPrayersProp {
   prayers?: Record<string, Prayer> | Prayer;
 }
 
-interface UserSelectProp {
-  auth: UserState;
-}
-
 export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
-  const profile = useSelector((state: UserSelectProp) => state.auth);
 
   const initialValue = {
     columnId: column.id,
     title: '',
-    token: profile.user.token,
+    token: selectToken(),
   };
 
   const submit = (values: Prayer) => {
@@ -65,9 +60,7 @@ export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
       ></Form>
       {Object.values(prayers || {}).map((prayer) => {
         if (prayer.columnId == column.id) {
-          return (
-            <PrayerItem key={prayer.id} prayer={prayer} token={profile.user.token} />
-          );
+          return <PrayerItem key={prayer.id} prayer={prayer} />;
         }
       })}
     </View>

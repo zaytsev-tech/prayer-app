@@ -4,17 +4,12 @@ import { Route } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 
-import { UserState } from '../../store/ducks/auth';
 import { Prayer, prayerRequest } from '../../store/ducks/prayers';
 import { MyPrayers } from '../../views/my-prayers';
 import { Subscribed } from '../../views/subscribed';
 
 interface TodoProps {
   route: Route;
-}
-
-interface UserSelectProp {
-  auth: UserState;
 }
 
 interface PrayersProps {
@@ -26,10 +21,9 @@ const Tab = createMaterialTopTabNavigator();
 export const Todo: FC<TodoProps> = ({ route }) => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
-  const profile = useSelector((state: UserSelectProp) => state.auth);
   const prayers = useSelector((state: PrayersProps) => state.prayers);
   useEffect(() => {
-    dispatch(prayerRequest(profile.user.token));
+    dispatch(prayerRequest());
   }, []);
 
   return (

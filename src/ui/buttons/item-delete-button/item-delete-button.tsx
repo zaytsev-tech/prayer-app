@@ -4,17 +4,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { UserState } from '../../../store/ducks/auth';
-import { DeletePrayer, deletePrayerRequest } from '../../../store/ducks/prayers';
+import { deletePrayerRequest } from '../../../store/ducks/prayers';
 
-interface UserSelectProp {
-  auth: UserState;
+interface DeleteButtonProp {
+  prayerId: number;
 }
 
-export const ItemDeleteButton: FC<DeletePrayer> = ({ prayerId, token }) => {
+export const ItemDeleteButton: FC<DeleteButtonProp> = ({ prayerId }) => {
   const dispatch = useDispatch();
   return (
-    <ViewDelete onPress={() => dispatch(deletePrayerRequest({ prayerId, token }))}>
+    <ViewDelete onPress={() => dispatch(deletePrayerRequest(prayerId))}>
       <TextDelete>Delete</TextDelete>
     </ViewDelete>
   );

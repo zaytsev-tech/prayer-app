@@ -9,10 +9,10 @@ import { setError, setLoading } from '../../ducks/auth/slice';
 import { PrayerActions } from './actions';
 import { addPrayer, deletePrayer, setPrayers } from './slice';
 
-function* getPrayersSaga(value) {
+function* getPrayersSaga() {
   try {
     yield put(setLoading(true));
-    const response = yield call(getPrayersAPI, value.payload);
+    const response = yield call(getPrayersAPI);
     yield put(setPrayers(response.data));
   } catch (e) {
     if (e instanceof Error) {
