@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { rootReducer } from '../store/storage/middleware';
+import { store } from '../components/store-provider';
+import { selectToken } from '../store/ducks/auth';
 
 const baseAxiosConfig: AxiosRequestConfig = {
   baseURL: 'https://prayer.herokuapp.com',
@@ -13,14 +13,12 @@ const baseAxiosConfig: AxiosRequestConfig = {
 export const apiAuth = axios.create(baseAxiosConfig);
 export const apiPrayer = axios.create(baseAxiosConfig);
 
-const store = configureStore({ reducer: rootReducer });
-
 apiPrayer.interceptors.request.use(
   (config) => {
-    const token = store.getState().auth.user.token;
+    const token = selectToken(store);
     if (token) {
       if (config.headers) {
-        config.headers.Authorization = token;
+        config.headers.Authorization = `Bearer ${token}`;
       }
     }
     return config;

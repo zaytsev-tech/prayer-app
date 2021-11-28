@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { UserState } from './types';
 
@@ -6,8 +6,8 @@ interface UserProps {
   auth: UserState;
 }
 
-const profile = useSelector((state: UserProps) => state.auth);
+const selectProfile = (store) => store.getState().auth;
 
-export const selectToken = () => {
-  return profile.user.token;
-};
+export const selectToken = createSelector(selectProfile, (auth) => {
+  return auth.user.token;
+});

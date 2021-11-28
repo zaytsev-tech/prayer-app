@@ -4,6 +4,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import styled, { ThemeContext } from 'styled-components';
 
+import { store } from '../../components/store-provider';
 import { selectToken } from '../../store/ducks/auth';
 import { Column } from '../../store/ducks/columns';
 import { Prayer } from '../../store/ducks/prayers';
@@ -23,7 +24,7 @@ export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
   const initialValue = {
     columnId: column.id,
     title: '',
-    token: selectToken(),
+    token: selectToken(store),
   };
 
   const submit = (values: Prayer) => {

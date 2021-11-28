@@ -9,7 +9,6 @@ function* getColumnsSaga() {
   try {
     yield put(setLoading(true));
     const response = yield call(getColumns);
-    console.log('response: ', response.data);
     yield put(setColumns(response.data));
   } catch (e) {
     if (e instanceof Error) {

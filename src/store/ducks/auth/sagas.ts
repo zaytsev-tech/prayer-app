@@ -23,7 +23,7 @@ function* loginUser(values) {
 
 function* createUser(values) {
   try {
-    //yield put(setLoading(true));
+    yield put(setLoading(true));
     const response = yield call(postUserReg, values.payload);
     alert(`User "${response.data.name}" was created!`);
   } catch (e) {
@@ -34,7 +34,7 @@ function* createUser(values) {
       yield put(setError('unknown message'));
     }
   } finally {
-    //yield put(setLoading(false));
+    yield put(setLoading(false));
   }
 }
 

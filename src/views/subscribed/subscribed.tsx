@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { View } from 'react-native';
 
-import { selectToken } from '../../store/ducks/auth';
 import { Column } from '../../store/ducks/columns';
 import { Prayer } from '../../store/ducks/prayers';
 import { PrayerItem } from '../prayer-item';
@@ -16,7 +15,7 @@ export const Subscribed: FC<MyPrayersProp> = ({ column, prayers }) => {
     <View>
       {Object.values(prayers || {}).map((prayer) => {
         if (prayer.columnId == column.id) {
-          return <PrayerItem key={prayer.id} prayer={prayer} token={selectToken()} />;
+          return <PrayerItem key={prayer.id} prayer={prayer} />;
         }
       })}
     </View>
