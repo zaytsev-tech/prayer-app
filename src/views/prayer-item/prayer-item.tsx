@@ -19,7 +19,6 @@ export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const onSubmit = (value: Prayer) => {
-    console.log(value);
     dispatch(updatePrayerRequest({ id: value.id || 0, prayer: value }));
   };
   const titleCutter = (title: string) => {

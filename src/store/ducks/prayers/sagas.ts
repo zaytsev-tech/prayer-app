@@ -67,6 +67,8 @@ function* deletePrayerSaga(value) {
     yield put(setLoading(true));
     yield call(deletePrayerAPI, value.payload);
     yield put(deletePrayer(value.payload.prayerId));
+    const response = yield call(getPrayersAPI);
+    yield put(setPrayers(response.data));
   } catch (e) {
     if (e instanceof Error) {
       yield put(setError(e.message));

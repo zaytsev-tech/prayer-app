@@ -10,7 +10,7 @@ import { Column } from '../../store/ducks/columns';
 import { Prayer } from '../../store/ducks/prayers';
 import { setPrayerRequest } from '../../store/ducks/prayers/actions';
 import { IconPlus } from '../../ui';
-import { PrayerItem } from '../prayer-item';
+import { ListItems } from '../list-items';
 
 interface MyPrayersProp {
   column: Column;
@@ -59,11 +59,7 @@ export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
           </ViewInputPrayer>
         )}
       ></Form>
-      {Object.values(prayers || {}).map((prayer) => {
-        if (prayer.columnId == column.id) {
-          return <PrayerItem key={prayer.id} prayer={prayer} />;
-        }
-      })}
+      <ListItems id={column.id || 0} prayers={prayers} />
     </View>
   );
 };

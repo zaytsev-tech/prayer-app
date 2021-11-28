@@ -18,8 +18,6 @@ export const postPrayerAPI = ({ columnId, title }) => {
 };
 
 export const updatePrayerAPI = ({ id, prayer }) => {
-  console.log('id: ', id);
-  console.log('obj: ', prayer);
   return apiPrayer
     .put(
       `/prayers/${id}`,
