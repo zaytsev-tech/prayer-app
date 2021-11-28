@@ -19,3 +19,8 @@ export interface FormInputPrayer {
   title: string;
   token: string;
 }
+
+export interface FormUpdatePrayer {
+  id: number;
+  prayer: Prayer;
+}

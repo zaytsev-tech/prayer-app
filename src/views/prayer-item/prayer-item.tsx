@@ -3,10 +3,11 @@ import { FC, useContext } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import styled from 'styled-components';
 
-import { Prayer } from '../../store/ducks/prayers';
+import { Prayer, updatePrayerRequest } from '../../store/ducks/prayers';
 import { ItemDeleteButton } from '../../ui/buttons/item-delete-button';
 import { IconLineUp, IconPray, IconUser } from '../../ui/icons';
 
@@ -16,14 +17,23 @@ interface PrayerItemProp {
 
 export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
   const theme = useContext(ThemeContext);
-  const onSubmit = (value) => {
+  const dispatch = useDispatch();
+  const onSubmit = (value: Prayer) => {
     console.log(value);
+    dispatch(updatePrayerRequest({ id: value.id || 0, prayer: value }));
+  };
+  const titleCutter = (title: string) => {
+    if (title.length > 15) {
+      return title.substr(0, 14) + '...';
+    } else {
+      return title;
+    }
   };
   return (
     <Swipeable renderRightActions={() => <ItemDeleteButton prayerId={prayer.id || 0} />}>
       <Form
         onSubmit={onSubmit}
-        initialValues={prayer.checked}
+        initialValues={prayer}
         render={({ handleSubmit }) => (
           <Container>
             <ViewPrayerItem>
@@ -31,11 +41,22 @@ export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
                 <IconLineUp width={25} height={25} color={theme.colors.blue} />
                 <Field
                   name="checked"
-                  render={({ input: { value, onChange } }) => (
-                    <CheckBox value={value} onValueChange={onChange} />
+                  render={({ input: { value = prayer.checked, onChange } }) => (
+                    <CheckBox
+                      value={value}
+                      tintColors={{ true: `${theme.colors.textBlack}` }}
+                      onValueChange={(value) => {
+                        onChange(value);
+                        handleSubmit();
+                      }}
+                    />
                   )}
                 />
-                <TextItem>{prayer.title}</TextItem>
+                {prayer.checked == false ? (
+                  <TextItem>{titleCutter(prayer.title)}</TextItem>
+                ) : (
+                  <StrikeText>{titleCutter(prayer.title)}</StrikeText>
+                )}
               </ViewLeft>
               <ViewIcons>
                 <ViewComments>
@@ -100,4 +121,8 @@ const TextItem = styled(Text)`
   bottom: 0px;
   font-size: 17px;
   align-self: center;
+`;
+
+const StrikeText = styled(TextItem)`
+  text-decoration-line: line-through;
 `;

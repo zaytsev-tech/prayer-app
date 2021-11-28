@@ -4,10 +4,11 @@ import {
   deletePrayerAPI,
   getPrayersAPI,
   postPrayerAPI,
+  updatePrayerAPI,
 } from '../../../api/prayer/prayer-api';
 import { setError, setLoading } from '../../ducks/auth/slice';
 import { PrayerActions } from './actions';
-import { addPrayer, deletePrayer, setPrayers } from './slice';
+import { addPrayer, deletePrayer, setPrayers, updatePrayer } from './slice';
 
 function* getPrayersSaga() {
   try {
@@ -43,6 +44,24 @@ function* setPrayerSaga(value) {
   }
 }
 
+function* updatePrayerSaga(value) {
+  try {
+    yield put(setLoading(true));
+    console.log('payload: ', value.payload);
+    const response = yield call(updatePrayerAPI, value.payload);
+    yield put(updatePrayer(response.data));
+  } catch (e) {
+    if (e instanceof Error) {
+      yield put(setError(e.message));
+    } else {
+      console.log('Error: ', e);
+      yield put(setError('unknown message'));
+    }
+  } finally {
+    yield put(setLoading(false));
+  }
+}
+
 function* deletePrayerSaga(value) {
   try {
     yield put(setLoading(true));
@@ -63,5 +82,6 @@ function* deletePrayerSaga(value) {
 export function* watcherPrayers() {
   yield takeLatest(PrayerActions.prayerRequest, getPrayersSaga);
   yield takeLatest(PrayerActions.setPrayerRequest, setPrayerSaga);
+  yield takeLatest(PrayerActions.updatePrayerRequest, updatePrayerSaga);
   yield takeLatest(PrayerActions.deletePrayerRequest, deletePrayerSaga);
 }

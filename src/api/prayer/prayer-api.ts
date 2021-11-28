@@ -7,11 +7,26 @@ export const getPrayersAPI = () => {
 export const postPrayerAPI = ({ columnId, title }) => {
   return apiPrayer
     .post(
-      `/${columnId}/prayers`,
+      `/columns/${columnId}/prayers`,
       JSON.stringify({
         title: title,
         description: '',
         checked: false,
+      }),
+    )
+    .then((response) => response);
+};
+
+export const updatePrayerAPI = ({ id, prayer }) => {
+  console.log('id: ', id);
+  console.log('obj: ', prayer);
+  return apiPrayer
+    .put(
+      `/prayers/${id}`,
+      JSON.stringify({
+        title: prayer.title,
+        description: prayer.description,
+        checked: prayer.checked,
       }),
     )
     .then((response) => response);
