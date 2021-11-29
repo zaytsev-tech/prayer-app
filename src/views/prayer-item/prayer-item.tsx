@@ -1,4 +1,5 @@
 import CheckBox from '@react-native-community/checkbox';
+import { useNavigation } from '@react-navigation/core';
 import { FC, useContext } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -18,6 +19,7 @@ interface PrayerItemProp {
 export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const onSubmit = (value: Prayer) => {
     dispatch(updatePrayerRequest({ id: value.id || 0, prayer: value }));
   };
@@ -34,7 +36,17 @@ export const PrayerItem: FC<PrayerItemProp> = ({ prayer }) => {
         onSubmit={onSubmit}
         initialValues={prayer}
         render={({ handleSubmit }) => (
-          <Container>
+          <Container
+            onPress={() =>
+              navigation.navigate(
+                'Desk' as never,
+                {
+                  screen: 'Details',
+                  prayer,
+                } as never,
+              )
+            }
+          >
             <ViewPrayerItem>
               <ViewLeft>
                 <IconLineUp width={25} height={25} color={theme.colors.blue} />

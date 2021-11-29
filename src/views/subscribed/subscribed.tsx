@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { Column } from '../../store/ducks/columns';
 import { Prayer } from '../../store/ducks/prayers';
-import { PrayerItem } from '../prayer-item';
+import { ListItems } from '../list-items';
 
 interface MyPrayersProp {
   column: Column;
@@ -13,11 +13,7 @@ interface MyPrayersProp {
 export const Subscribed: FC<MyPrayersProp> = ({ column, prayers }) => {
   return (
     <View>
-      {Object.values(prayers || {}).map((prayer) => {
-        if (prayer.columnId == column.id) {
-          return <PrayerItem key={prayer.id} prayer={prayer} />;
-        }
-      })}
+      <ListItems id={column.id || 0} prayers={prayers} />
     </View>
   );
 };

@@ -1,19 +1,25 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { FC, useContext, useEffect } from 'react';
+import { Route, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 
 import { setLogout } from '../../store/ducks/auth';
 import { columnRequest } from '../../store/ducks/columns';
-import { IconGear, IconPlus } from '../../ui/icons';
+import { IconGear, IconPlus, IconPray } from '../../ui/icons';
 import { AddColumn } from '../add-column';
 import { BlockColumns } from '../columns';
+import { PrayerDetails } from '../prayer-details';
 import { Todo } from '../to-do';
+
+interface TodoProps {
+  route: Route;
+}
 
 export const StackDesk = createNativeStackNavigator();
 
-export const MyDesk = () => {
+export const MyDesk: FC<TodoProps> = ({ route }) => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
   useEffect(() => {
@@ -55,6 +61,51 @@ export const MyDesk = () => {
           ),
         })}
       />
+      <StackDesk.Screen
+        name="Details"
+        options={{
+          headerStyle: {
+            backgroundColor: theme.colors.brown,
+          },
+          headerTintColor: theme.colors.white,
+          headerTitle: () => (
+            <Header>
+              <HeadText style={{ lineHeight: 20 }}>
+                Prayer item two which is for my family to love God whole heartedly.
+              </HeadText>
+            </Header>
+          ),
+          headerTitleAlign: 'left',
+          headerRight: () => (
+            <Icon>
+              <IconPray width={23} height={23} color={theme.colors.white} />
+            </Icon>
+          ),
+        }}
+      >
+        {() => <PrayerDetails prayer={route.params.prayer} />}
+      </StackDesk.Screen>
     </StackDesk.Navigator>
   );
 };
+
+const Header = styled(View)`
+  margin: 0 auto;
+  left: -63px;
+  width: 97%;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  position: relative;
+`;
+
+const HeadText = styled(Text)`
+  color: ${({ theme: { colors } }) => colors.white};
+  position: relative;
+`;
+
+const Icon = styled(TouchableOpacity)`
+  position: absolute;
+  top: -39px;
+  right: 2px;
+  margin-bottom: 0px;
+`;

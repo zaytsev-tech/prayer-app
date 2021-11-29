@@ -47,7 +47,6 @@ function* setPrayerSaga(value) {
 function* updatePrayerSaga(value) {
   try {
     yield put(setLoading(true));
-    console.log('payload: ', value.payload);
     const response = yield call(updatePrayerAPI, value.payload);
     yield put(updatePrayer(response.data));
   } catch (e) {

@@ -26,5 +26,26 @@ export const typography = {
       font-weight: bold;
       text-transform: uppercase;
     `,
+    mainDetails: css`
+      font-family: SF UI Text;
+      font-size: 22px;
+      line-height: 26px;
+      color: #bfb393;
+    `,
+    moreDetails: css`
+      font-family: SF UI Text;
+      font-size: 13px;
+      line-height: 15px;
+      color: #514d47;
+    `,
+    headerDetails: css`
+      font-family: SF UI Text;
+      font-size: 13px;
+      line-height: 15px;
+      display: flex;
+      align-items: flex-end;
+      text-transform: uppercase;
+      color: #72a8bc;
+    `,
   },
 };

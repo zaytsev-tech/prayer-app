@@ -25,7 +25,7 @@ const Container = styled(View)`
   margin-right: 10%;
   margin-left: 10%;
   top: 10px;
-  bottom: 20px;
+  margin-bottom: 10px;
   height: 40px;
   border-bottom-color: ${({ theme: { colors } }) => colors.borderBlack};
   border-bottom-width: 1px;
