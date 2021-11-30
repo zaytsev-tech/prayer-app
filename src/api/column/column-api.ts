@@ -1,23 +1,9 @@
-import axios from 'axios';
+import { apiPrayer } from '../base-axios';
 
-export const getColumns = (token: string) => {
-  return axios({
-    method: 'GET',
-    url: 'https://prayer.herokuapp.com/columns',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getColumns = () => {
+  return apiPrayer.get('/columns').then((response) => response);
 };
 
-export const postColumn = ({ token, column }) => {
-  return axios({
-    method: 'POST',
-    responseType: 'json',
-    url: 'https://prayer.herokuapp.com/columns/',
-    data: column,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const postColumn = (column) => {
+  return apiPrayer.post('/columns/', column).then((response) => response);
 };

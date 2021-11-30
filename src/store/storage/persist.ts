@@ -9,6 +9,7 @@ import { rootReducer, rootSaga, sagaMiddleware } from './middleware';
 const persistConfig = {
   key: 'userStorage',
   storage: AsyncStorage,
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

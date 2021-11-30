@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 interface DefaultButtonProps {
@@ -15,7 +15,7 @@ export const DefaultButton: FC<DefaultButtonProps> = ({ title, onPress }) => {
   );
 };
 
-const ButtonBlock = styled(Pressable)`
+const ButtonBlock = styled(TouchableOpacity)`
   height: 30px;
   background: #bfb393;
   box-shadow: 0px 2px 15px rgba(66, 78, 117, 0.1);

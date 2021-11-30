@@ -1,0 +1,90 @@
+import { FC, useContext } from 'react';
+import { Field, Form } from 'react-final-form';
+import { TextInput, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import styled, { ThemeContext } from 'styled-components';
+
+import { store } from '../../components/store-provider';
+import { selectToken } from '../../store/ducks/auth';
+import { Column } from '../../store/ducks/columns';
+import { Prayer } from '../../store/ducks/prayers';
+import { setPrayerRequest } from '../../store/ducks/prayers/actions';
+import { IconPlus } from '../../ui';
+import { ListItems } from '../list-items';
+
+interface MyPrayersProp {
+  column: Column;
+  prayers?: Record<string, Prayer> | Prayer;
+}
+
+export const MyPrayers: FC<MyPrayersProp> = ({ column, prayers }) => {
+  const dispatch = useDispatch();
+  const theme = useContext(ThemeContext);
+
+  const initialValue = {
+    columnId: column.id,
+    title: '',
+    token: selectToken(store),
+  };
+
+  const submit = (values: Prayer) => {
+    dispatch(setPrayerRequest(values));
+  };
+
+  return (
+    <View>
+      <Form
+        onSubmit={submit}
+        initialValues={initialValue}
+        validate={(values) => {
+          const errors = { title: '' };
+          if (values.title == '') {
+            errors.title = 'Required';
+          } else {
+            return {};
+          }
+          return errors;
+        }}
+        render={({ handleSubmit }) => (
+          <ViewInputPrayer>
+            <Plus onPress={handleSubmit}>
+              <IconPlus width={28} height={28} color={theme.colors.blue} />
+            </Plus>
+            <Field
+              name="title"
+              render={({ input: { value, onChange } }) => (
+                <Input placeholder="Add a prayer..." value={value} onChange={onChange} />
+              )}
+            />
+          </ViewInputPrayer>
+        )}
+      ></Form>
+      <ListItems id={column.id || 0} prayers={prayers} />
+    </View>
+  );
+};
+
+const ViewInputPrayer = styled(View)`
+  margin: 10px;
+  left: 0px;
+  top: 0px;
+  flex-direction: row;
+  background: ${({ theme: { colors } }) => colors.white};
+  border: 1px solid ${({ theme: { colors } }) => colors.borderBlack};
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const Plus = styled(TouchableOpacity)`
+  position: relative;
+  top: 10px;
+  left: 10px;
+`;
+
+const Input = styled(TextInput)`
+  position: relative;
+  top: 0px;
+  left: 25px;
+  font-size: 17px;
+  color: ${({ theme: { colors } }) => colors.textBlack};
+`;

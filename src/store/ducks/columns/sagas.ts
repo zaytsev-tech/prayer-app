@@ -5,10 +5,10 @@ import { setError, setLoading } from '../../ducks/auth/slice';
 import { ColumnActions } from './actions';
 import { addColumn, setColumns } from './slice';
 
-function* getColumnsSaga(value) {
+function* getColumnsSaga() {
   try {
     yield put(setLoading(true));
-    const response = yield call(getColumns, value.payload);
+    const response = yield call(getColumns);
     yield put(setColumns(response.data));
   } catch (e) {
     if (e instanceof Error) {
@@ -26,7 +26,6 @@ function* setColumnSaga(value) {
   try {
     yield put(setLoading(true));
     const response = yield call(postColumn, value.payload);
-    console.log('ddata: ', response);
     yield put(addColumn(response.data));
   } catch (e) {
     if (e instanceof Error) {
