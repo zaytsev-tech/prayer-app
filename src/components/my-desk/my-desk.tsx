@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FC, useContext, useEffect } from 'react';
-import { Route, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import styled from 'styled-components';
@@ -13,13 +13,9 @@ import { BlockColumns } from '../columns';
 import { PrayerDetails } from '../prayer-details';
 import { Todo } from '../to-do';
 
-interface TodoProps {
-  route: Route;
-}
-
 export const StackDesk = createNativeStackNavigator();
 
-export const MyDesk: FC<TodoProps> = ({ route }) => {
+export const MyDesk: FC = () => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
   useEffect(() => {
@@ -83,7 +79,7 @@ export const MyDesk: FC<TodoProps> = ({ route }) => {
           ),
         }}
       >
-        {() => <PrayerDetails prayer={route.params.prayer} />}
+        {() => <PrayerDetails />}
       </StackDesk.Screen>
     </StackDesk.Navigator>
   );

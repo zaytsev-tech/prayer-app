@@ -5,19 +5,14 @@ import { useDispatch } from 'react-redux';
 import styled, { ThemeContext } from 'styled-components';
 
 import { setCommentRequest } from '../../store/ducks/comments/actions';
-import { Prayer } from '../../store/ducks/prayers';
 import { IconComment } from '../../ui/icons';
 import { CommentsList } from '../comments-list';
-
-interface CommentsBlockProp {
-  prayer: Prayer;
-}
 
 const initialComment = {
   text: '',
 };
 
-export const CommentsBlock: FC<CommentsBlockProp> = ({ prayer }) => {
+export const CommentsBlock: FC = () => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const onSubmit = (value) => {

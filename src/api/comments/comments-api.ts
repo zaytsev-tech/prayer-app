@@ -1,13 +1,10 @@
+import { Comment } from '../../store/ducks/comments';
 import { apiPrayer } from '../base-axios';
 
-export const getComments = () => {
-  return apiPrayer.get('/comments').then((response) => {
-    return response;
-  });
-};
+export function fetchComments() {
+  return apiPrayer.get('/comments');
+}
 
-export const postComment = (comment) => {
-  return apiPrayer
-    .post('/comments/', JSON.stringify({ body: comment }))
-    .then((response) => response);
-};
+export function postComment(comment: Comment) {
+  return apiPrayer.post('/comments', comment);
+}

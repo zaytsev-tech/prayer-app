@@ -1,1 +1,1 @@
-export { getComments, postComment } from './comments-api';
+export { fetchComments, postComment } from './comments-api';

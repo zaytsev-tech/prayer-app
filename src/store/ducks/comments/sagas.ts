@@ -1,14 +1,13 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 
-import { getComments, postComment } from '../../../api/comments';
-import { setError, setLoading } from '../auth/slice';
+import { fetchComments, postComment } from '../../../api/comments';
 import { CommentActions } from './actions';
-import { addComment, setComments } from './slice';
+import { addComment, setComments, setError, setLoading } from './slice';
 
 function* getCommentsSaga() {
   try {
     yield put(setLoading(true));
-    const response = yield call(getComments);
+    const response = yield call(fetchComments);
     yield put(setComments(response.data));
   } catch (e) {
     if (e instanceof Error) {

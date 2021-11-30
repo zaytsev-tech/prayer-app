@@ -14,22 +14,18 @@ export const commentReducer = createSlice({
       state.error = action.payload;
     },
     setComments(state, action) {
-      return {
-        ...state,
-        error: null,
-        isError: false,
-        data: action.payload.reduce((obj, curr) => {
-          obj[curr.id] = curr;
-          return obj;
-        }, {}),
-      };
+      state.isError = false;
+      state.error = null;
+      state.data = action.payload.reduce((obj, curr) => {
+        obj[curr.id] = curr;
+        return obj;
+      }, {} as Record<string, Comment>);
     },
     addComment(state, action) {
       const { id } = action.payload;
       state[id] = action.payload;
-      // return { ...state, [action.payload.id]: action.payload };
     },
   },
 });
 
-export const { setComments, addComment } = commentReducer.actions;
+export const { setComments, setLoading, setError, addComment } = commentReducer.actions;

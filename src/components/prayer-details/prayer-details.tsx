@@ -3,15 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import styled, { ThemeContext } from 'styled-components';
 
-import { Prayer } from '../../store/ducks/prayers';
 import { IconAddMember, IconLineUp } from '../../ui/icons';
 import { CommentsBlock } from '../../views/comments-block';
 
-interface PrayerDetailsProp {
-  prayer: Prayer;
-}
-
-export const PrayerDetails: FC<PrayerDetailsProp> = ({ prayer }) => {
+export const PrayerDetails: FC = () => {
   const theme = useContext(ThemeContext);
   return (
     <ScrollView>
@@ -51,7 +46,7 @@ export const PrayerDetails: FC<PrayerDetailsProp> = ({ prayer }) => {
         </Members>
         <Comments>
           <HeaderTitle>COMMENTS</HeaderTitle>
-          <CommentsBlock prayer={prayer} />
+          <CommentsBlock />
         </Comments>
       </Container>
     </ScrollView>
